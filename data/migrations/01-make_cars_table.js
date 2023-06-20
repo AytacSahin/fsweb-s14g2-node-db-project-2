@@ -29,7 +29,6 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 
-
 exports.down = function (knex) {
   //1  up ve down fonksiyonlarını return etmek zorunda! 
   //2  Her up fonksiyonunun bir de down fonksiyonu olur.
