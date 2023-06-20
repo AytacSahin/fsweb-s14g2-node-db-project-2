@@ -9,13 +9,18 @@ const getById = async (id) => {
   return await db("cars").where("id", id).first();
 }
 
-const create = async (cars) => {
-  let [id] = await db("cars").insert(cars);
+const getByVin = async (vin) => {
+  return await db("cars").where("vin", vin).first();
+}
+
+const create = async (car) => {
+  let [id] = await db("cars").insert(car);
   return getById(id);
 }
 
 module.exports = {
   getAll,
   getById,
-  create
+  create,
+  getByVin
 }
