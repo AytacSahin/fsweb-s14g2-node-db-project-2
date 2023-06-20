@@ -5,7 +5,11 @@
 
 exports.seed = async function (knex) {
     // Tüm dataları önce siler, sonra verilenleri ekler:
-    await knex("cars").del()
+    // await knex("cars").del(), dersek id izleri kalır.
+    // await knex("cars").truncate(), dersek id izleri kalmaz. Genellikle bu tercih edilir.
+
+    await knex("cars").truncate()
+
     await knex("cars").insert([
         { id: 1, vin: "test-1", make: "test-1", model: "test-1", mileage: 9999, title: "test-1", transmission: "test-1" },
         { id: 2, vin: "test-2", make: "test-2", model: "test-2", mileage: 9999, title: "test-2", transmission: "test-2" },
