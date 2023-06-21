@@ -13,8 +13,7 @@ exports.up = function (knex) {
       .notNullable()
       .unique();
     table.string("make")
-      .notNullable()
-      .unique();
+      .notNullable();
     table.string("model")
       .notNullable();
     table.integer("mileage")

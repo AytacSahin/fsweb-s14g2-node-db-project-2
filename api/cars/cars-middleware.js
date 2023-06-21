@@ -17,9 +17,8 @@ const checkCarId = async (req, res, next) => {
 }
 
 const checkCarPayload = (req, res, next) => {
-  // HOKUS POKUS
   try {
-    const allFields = ["vin", "make", "model", "mileage", "transmission"];
+    const allFields = ["vin", "make", "model", "mileage"];
     let missedFields = [];
     for (let i = 0; i < allFields.length; i++) {
       const item = allFields[i];
@@ -38,7 +37,6 @@ const checkCarPayload = (req, res, next) => {
 }
 
 const checkVinNumberValid = (req, res, next) => {
-  // HOKUS POKUS
   try {
     let isValidVin = vinValidator.validate(req.body.vin);
     if (!isValidVin) {
@@ -50,10 +48,11 @@ const checkVinNumberValid = (req, res, next) => {
     next(error);
   }
 }
+
 const checkVinNumberUnique = async (req, res, next) => {
   try {
     const existVin = await carsModel.getByVin(req.body.vin);
-    if (!existVin) {
+    if (existVin) {
       res.status(400).json({ message: `vin ${req.body.vin} already exists` })
     }
     else {
@@ -63,8 +62,6 @@ const checkVinNumberUnique = async (req, res, next) => {
     next(error);
   }
 }
-
-
 
 module.exports = {
   checkCarId,

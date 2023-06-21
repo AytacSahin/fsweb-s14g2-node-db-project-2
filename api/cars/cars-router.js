@@ -21,15 +21,7 @@ router.get("/:id", mw.checkCarId, (req, res, next) => {
 
 router.post("/", mw.checkCarPayload, mw.checkVinNumberValid, mw.checkVinNumberUnique, async (req, res, next) => {
     try {
-        let newCar = {
-            vin: req.body.vin,
-            make: req.body.make,
-            model: req.body.model,
-            mileage: req.body.mileage,
-            title: req.body.title,
-            transmission: req.body.transmission,
-        }
-        const addedCar = await carsModel.create(newCar);
+        const addedCar = await carsModel.create(req.body);
         res.status(201).json(addedCar);
     } catch (error) {
         next(error);
